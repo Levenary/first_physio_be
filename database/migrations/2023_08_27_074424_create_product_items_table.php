@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('customer', function (Blueprint $table) {
+        Schema::create('product_items', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('nik');
-            $table->text('address');
-            $table->string('email');
-            $table->string('phone');
-            $table->boolean('is_active')->default(true); // Added 'is_active' field
+            $table->decimal('price', 10, 2);
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('customer');
+        Schema::dropIfExists('product_items');
     }
 };

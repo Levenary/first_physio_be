@@ -4,6 +4,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PromoController;
+use App\Http\Controllers\ProductItemController;
+use App\Http\Controllers\BranchController;
 
 
 /*
@@ -30,6 +35,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 });
 
 Route::resource('customers', CustomerController::class);
-
-Route::get('/deatail', [CustomerController::class, 'show']);//->middleware(['auth:sanctum']);
-Route::post('/CreateUser', [CustomerController::class, 'store']);//->middleware(['auth:sanctum']);
+Route::resource('employees', EmployeeController::class);
+Route::resource('products', ProductController::class);
+Route::resource('promos', PromoController::class);
+Route::resource('product_items', ProductItemController::class);
+Route::resource('branches', BranchController::class);

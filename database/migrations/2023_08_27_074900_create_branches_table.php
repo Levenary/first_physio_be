@@ -9,20 +9,21 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('branchs', function (Blueprint $table) {
+        Schema::create('branches', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('lat');
-            $table->string('lng');
+            $table->decimal('lat', 10, 8);
+            $table->decimal('lng', 11, 8);
             $table->string('phone');
             $table->text('address');
             $table->json('operation_json');
-            $table->boolean('is_active')->default(true); // Added 'is_active' field
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
+    
 
     /**
      * Reverse the migrations.
