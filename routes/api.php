@@ -32,11 +32,11 @@ Route::post('/login', [LoginController::class, 'loginFunction']);
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/logout', [LoginController::class, 'logOutFunction']);
     Route::get('/profile', [LoginController::class, 'profileFunction']);
+    Route::resource('customers', CustomerController::class);
+    Route::resource('employees', EmployeeController::class);
+    Route::resource('products', ProductController::class);
+    Route::resource('promos', PromoController::class);
+    Route::resource('product_items', ProductItemController::class);
+    Route::resource('branches', BranchController::class);
 });
 
-Route::resource('customers', CustomerController::class);
-Route::resource('employees', EmployeeController::class);
-Route::resource('products', ProductController::class);
-Route::resource('promos', PromoController::class);
-Route::resource('product_items', ProductItemController::class);
-Route::resource('branches', BranchController::class);
