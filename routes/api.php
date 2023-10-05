@@ -9,7 +9,9 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PromoController;
 use App\Http\Controllers\ProductItemController;
 use App\Http\Controllers\BranchController;
-
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\PurchaseOrderController;
+use App\Http\Controllers\SessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,5 +40,25 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::resource('promos', PromoController::class);
     Route::resource('product_items', ProductItemController::class);
     Route::resource('branches', BranchController::class);
+    Route::resource('purchase-orders', PurchaseOrderController::class);
+    Route::resource('sessions', SessionController::class);
+
 });
 
+Route::get('roles', [RoleController::class, 'index']);
+Route::get('roles/{id}', [RoleController::class, 'show']);
+
+
+Route::get('purchase-orders', [PurchaseOrderController::class, 'index']);
+Route::get('purchase-orders/customer/{customerId}', [PurchaseOrderController::class, 'getByCustomerId']);
+Route::get('purchase-orders/product/{productId}', [PurchaseOrderController::class, 'getByProductId']);
+Route::get('/purchase-orders/{id}', [PurchaseOrderController::class, 'show']);
+Route::get('purchase-orders/promos/{promotId}', [PurchaseOrderController::class, 'getByProductId']);
+Route::post('/purchase-order/session/{sessionsId}', [PurchaseOrderController::class, 'sessions']);
+Route::get('sessions/employees/{employeeId}', [SessionController::class, 'getByEmployeeId']);
+Route::get('/purchase-orders/branches/{branchId}', [PurchaseOrderController::class, 'getByBranchId']);
+Route::get('/purchase-order/session', [PurchaseOrderController::class, 'getByPurchaseOrderIdFromSession']);
+
+
+
+Route::get('/sessions/{id}', [SessionController::class, 'getSessionById']);

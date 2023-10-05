@@ -47,4 +47,6 @@ class EmployeeController extends Controller
         $employee->delete();
         return response()->json(['message' => 'Employee deleted successfully.']);
     }
+
+    
 }

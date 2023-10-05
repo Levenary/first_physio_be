@@ -17,4 +17,8 @@ class Employee extends Model
         'photo',
         'is_active',
     ];
+    public function sessions()
+    {
+        return $this->hasMany(Session::class, 'employee_id');
+    }
 }
