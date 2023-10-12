@@ -94,26 +94,19 @@ class PurchaseOrderController extends Controller
 
         return response()->json($purchaseOrders);
     }
-
-    public function getByPurchaseOrderIdFromSession()
-{
-    $purchaseOrderId = session()->get('purchase_order_id');
-
-    if (!is_numeric($purchaseOrderId) || $purchaseOrderId <= 0) {
-        return response()->json(['message' => 'Invalid purchase order ID'], 400);
-    }
-
-    $purchaseOrder = PurchaseOrder::with(['sessionData'])->find($purchaseOrderId);
-
-    if (!$purchaseOrder) {
-        return response()->json(['message' => 'Purchase order not found for ID: ' . $purchaseOrderId], 404);
-    }
-
-    // Anda dapat mengakses data sesi terkait dengan purchase order seperti ini
-    $sessionData = $purchaseOrder->sessionData;
-
-    return response()->json($sessionData);
-}
-
     
+    public function sessions($sessionId)
+    {
+        // Lakukan operasi sesuai kebutuhan Anda dengan $sessionId
+        // Contoh: Ambil data sesi dengan ID $sessionId dari basis data
+        $sessionData = Session::find($sessionId);
+
+        // Jika data tidak ditemukan, kembalikan respons 404
+        if (!$sessionData) {
+            return response()->json(['error' => 'Sesi tidak ditemukan'], 404);
+        }
+
+        // Jika data ditemukan, kembalikan respons sukses dengan data sesi
+        return response()->json(['data' => $sessionData]);
+    }
 }

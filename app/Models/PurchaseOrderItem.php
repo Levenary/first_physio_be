@@ -2,21 +2,30 @@
 
 // app/Models/PurchaseOrderItem.php
 
+
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class PurchaseOrderItem extends Model
 {
-    protected $fillable = ['customer_id', 'product_item_id'];
+    use HasFactory;
 
-    public function customers()
+    protected $fillable = [
+        'customer_id',
+        'product_item_id'
+    ];
+
+    // Define relasi dengan model lain jika diperlukan
+    public function productItem()
     {
-        return $this->belongsToMany(Customer::class, 'purchase_order_items', 'purchase_order_id', 'customer_id');
+        return $this->belongsTo(ProductItem::class);
     }
 
-    public function productItems()
+  
+    public function customer()
     {
-        return $this->belongsToMany(ProductItem::class, 'purchase_order_items', 'purchase_order_id', 'product_item_id');
+        return $this->belongsTo(Customer::class, 'customer_id', 'id');
     }
 }

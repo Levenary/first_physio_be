@@ -70,4 +70,16 @@ class LoginController extends Controller
 
         return BaseController::success($user, "Berhasil mengambil data user");
     }
+
+    public function purchaseOrder($userId)
+{
+    $user = User::findOrFail($userId);
+    $userData = [
+        'user_id' => $user->id,
+        'name' => $user->name,
+        'email' => $user->email,
+    ];
+
+    return response()->json($userData);
+}
 }

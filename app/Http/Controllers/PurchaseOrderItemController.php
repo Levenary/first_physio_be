@@ -1,77 +1,52 @@
 <?php
 
-// app/Http/Controllers/API/PurchaseOrderItemController.php
+// app/Http/Controllers/PurchaseOrderItemController.php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\PurchaseOrderItem;
+use Illuminate\Http\Request;
 
 class PurchaseOrderItemController extends Controller
 {
     public function index()
     {
-        // Mengambil daftar item pembelian sebagai respons JSON
         $purchaseOrderItems = PurchaseOrderItem::all();
         return response()->json($purchaseOrderItems);
     }
 
-    public function show($id)
-    {
-        // Mengambil detail item pembelian berdasarkan ID
-        $purchaseOrderItem = PurchaseOrderItem::find($id);
-
-        if (!$purchaseOrderItem) {
-            return response()->json(['message' => 'Item pembelian tidak ditemukan'], 404);
-        }
-
-        return response()->json($purchaseOrderItem);
-    }
-
     public function store(Request $request)
     {
-        // Validasi dan simpan item pembelian baru
-        $request->validate([
-            'customer_id' => 'required',
-            'product_item_id' => 'required',
+        $data = $request->validate([
+            'customer_id' => 'required|exists:customers,id',
+            'product_item_id' => 'required|exists:product_items,id',
         ]);
 
-        $purchaseOrderItem = PurchaseOrderItem::create($request->all());
+        $purchaseOrderItem = PurchaseOrderItem::create($data);
 
         return response()->json($purchaseOrderItem, 201);
     }
 
-    public function update(Request $request, $id)
+    // Tambahkan fungsi-fungsi lain seperti show(), update(), dan destroy() jika diperlukan.
+
+     public function productItem(Request $request, $productItemId)
     {
-        // Validasi dan update item pembelian berdasarkan ID
+        // Validasi data dari request jika diperlukan
         $request->validate([
-            'customer_id' => 'required',
-            'product_item_id' => 'required',
+            // Atur aturan validasi sesuai kebutuhan
         ]);
 
-        $purchaseOrderItem = PurchaseOrderItem::find($id);
+        // Temukan item produk berdasarkan ID $productItemId
+        $productItem = ProductItem::find($productItemId);
 
-        if (!$purchaseOrderItem) {
-            return response()->json(['message' => 'Item pembelian tidak ditemukan'], 404);
+        // Lakukan operasi atau logika lainnya sesuai kebutuhan aplikasi
+        // ...
+
+        // Memberikan respons sesuai dengan hasil operasi
+        if ($productItem) {
+            return response()->json(['message' => 'Product item found', 'data' => $productItem], 200);
+        } else {
+            return response()->json(['message' => 'Product item not found'], 404);
         }
-
-        $purchaseOrderItem->update($request->all());
-
-        return response()->json($purchaseOrderItem, 200);
-    }
-
-    public function destroy($id)
-    {
-        // Hapus item pembelian berdasarkan ID
-        $purchaseOrderItem = PurchaseOrderItem::find($id);
-
-        if (!$purchaseOrderItem) {
-            return response()->json(['message' => 'Item pembelian tidak ditemukan'], 404);
-        }
-
-        $purchaseOrderItem->delete();
-
-        return response()->json(['message' => 'Item pembelian berhasil dihapus'], 204);
     }
 }

@@ -58,4 +58,8 @@ class PurchaseOrder extends Model
     {
         return $this->belongsTo(Branch::class, 'branch_id', 'id');
     }
+    public function sessions()
+    {
+        return $this->hasMany(Session::class);
+    }
 }

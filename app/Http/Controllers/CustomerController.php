@@ -36,4 +36,19 @@ class CustomerController extends Controller
         $customer->delete();
         return response()->json(['message' => 'Customer deleted successfully.']);
     }
+
+    public function purchaseOrderItems($customerId)
+{
+    $customer = Customer::findOrFail($customerId);
+    $customerData = [
+        'customer_id' => $customer->id,
+        'name' => $customer->name,
+        'nik' => $customer->nik,
+        'address' => $customer->address,
+        'email' => $customer->email,
+        'phone' => $customer->phone
+    ];
+
+    return response()->json($customerData);
+}
 }
