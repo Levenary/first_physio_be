@@ -13,6 +13,6 @@ class Session extends Model
 
     public function employee()
     {
-        return $this->belongsTo(Employee::class, 'employee_id');
+        return $this->hasMany(Employee::class, 'employee_id');
     }
 }

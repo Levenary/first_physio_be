@@ -109,4 +109,31 @@ class PurchaseOrderController extends Controller
         // Jika data ditemukan, kembalikan respons sukses dengan data sesi
         return response()->json(['data' => $sessionData]);
     }
+
+    public function showMenuUtama()
+    {
+        $purchaseOrders = PurchaseOrder::with(['user', 'customer', 'product', 'sessions'])
+            ->select('created_at', 'user_id', 'customer_id', 'product_id', 'product_price', 'promo_price', 'expiration_date')
+            ->get();
+    
+        $processedOrders = [];
+    
+        foreach ($purchaseOrders as $order) {
+            $processedOrder = [
+                'created_at' => $order->created_at,
+                'user_id' => $order->user ? $order->user->name : null,
+                'customer_id' => $order->customer ? $order->customer->name : null,
+                'product_id' => $order->product ? $order->product->name : null,
+                'product_price' => $order->product_price,
+                'promo_price' => $order->promo_price,
+                'discounted_price' => $order->product_price - $order->promo_price,
+                'expiration_date' => $order->expiration_date
+            ];
+    
+            array_push($processedOrders, $processedOrder);
+        }
+    
+        return response()->json($processedOrders);
+    }
+    
 }

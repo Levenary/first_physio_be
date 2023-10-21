@@ -68,3 +68,7 @@ Route::get('/sessions/{id}', [SessionController::class, 'getSessionById']);
 Route::get('/purchase-order-items', [PurchaseOrderItemController::class, 'index']);
 Route::get('product-items/purchase-order-items/{productItemId}', [ProductItemController::class, 'purchaseOrderItems']);
 Route::get('customers/purchase-order-items/{customerId}', [CustomerController::class, 'purchaseOrderItems']);
+
+
+
+Route::get('/getMenuData', [PurchaseOrderController::class, 'showMenuUtama']);

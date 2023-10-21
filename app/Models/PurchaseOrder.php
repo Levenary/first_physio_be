@@ -60,6 +60,6 @@ class PurchaseOrder extends Model
     }
     public function sessions()
     {
-        return $this->hasMany(Session::class);
+        return $this->BelongsTo(Session::class);
     }
 }
