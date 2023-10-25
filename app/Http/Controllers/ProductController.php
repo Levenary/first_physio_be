@@ -35,4 +35,14 @@ class ProductController extends Controller
         $product->delete();
         return response()->json(['message' => 'Products deleted successfully.']);
     }
+
+    public function showProducts()
+    {
+        // Mengambil data produk dengan kolom yang spesifik
+        $products = Product::select('name', 'price', 'session', 'time_span', 'category_id', 'is_active')
+            ->get();
+
+        // Mengembalikan data dalam bentuk response JSON
+        return response()->json($products);
+    }
 }

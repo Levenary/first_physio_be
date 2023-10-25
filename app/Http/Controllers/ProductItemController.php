@@ -55,4 +55,13 @@ class ProductItemController extends Controller
     return response()->json($responseData);
 }
 
+public function showProductItems()
+    {
+        // Mengambil data product items dengan kolom name, price, dan is_active
+        $productItems = ProductItem::select('name', 'price', 'is_active')->get();
+
+        // Mengembalikan data dalam bentuk response JSON
+        return response()->json($productItems);
+    }
+
 }

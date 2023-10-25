@@ -35,4 +35,13 @@ class BranchController extends Controller
         $branch->delete();
         return response()->json(['message' => 'Branch deleted successfully.']);
     }
+
+    public function showBranches()
+    {
+        // Mengambil data cabang dengan kolom name, phone, address, dan is_active
+        $branches = Branch::select('name', 'phone', 'address', 'is_active')->get();
+        
+        // Mengembalikan data dalam bentuk response JSON
+        return response()->json($branches);
+    }
 }

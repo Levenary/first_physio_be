@@ -72,3 +72,10 @@ Route::get('customers/purchase-order-items/{customerId}', [CustomerController::c
 
 
 Route::get('/getMenuData', [PurchaseOrderController::class, 'showMenuUtama']);
+Route::get('/branch', [BranchController::class, 'showBranches']);
+Route::get('/customer', [CustomerController::class, 'showCustomers']);
+Route::get('/employee', [EmployeeController::class, 'showEmployees']);
+Route::get('/product', [ProductController::class, 'showProducts']);
+Route::get('/promo', [PromoController::class, 'showPromos']);
+Route::get('/purchase-order-item', [PurchaseOrderItemController::class, 'transformData']);
+Route::get('/product-item', [ProductItemController::class, 'showProductItems']);

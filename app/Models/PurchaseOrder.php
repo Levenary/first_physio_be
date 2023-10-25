@@ -22,7 +22,7 @@ class PurchaseOrder extends Model
 
     public function customer()
     {
-        return $this->belongsTo(Customer::class, 'customer_id', 'id');
+        return $this->hasMany(Customer::class, 'customer_id', 'id');
     }
 
     public function product()
@@ -56,7 +56,7 @@ class PurchaseOrder extends Model
 
     public function branch()
     {
-        return $this->belongsTo(Branch::class, 'branch_id', 'id');
+        return $this->hasMany(Branch::class, 'branch_id', 'id');
     }
     public function sessions()
     {

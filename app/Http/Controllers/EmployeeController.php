@@ -48,5 +48,12 @@ class EmployeeController extends Controller
         return response()->json(['message' => 'Employee deleted successfully.']);
     }
 
-    
+    public function showEmployees()
+    {
+        // Mengambil data karyawan dengan kolom name, email, dan is_active
+        $employees = Employee::select('name', 'email', 'is_active')->get();
+        
+        // Mengembalikan data dalam bentuk response JSON
+        return response()->json($employees);
+    }
 }

@@ -9,10 +9,8 @@ class ProductItem extends Model
 {
     protected $fillable = ['name', 'price', 'is_active'];
 
-    
     public function purchaseOrderItems()
     {
-        return $this->hasMany(PurchaseOrderItem::class);
+        return $this->hasMany(PurchaseOrderItem::class, 'product_item_id', 'id');
     }
-
 }

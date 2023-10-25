@@ -51,4 +51,13 @@ class CustomerController extends Controller
 
     return response()->json($customerData);
 }
+
+public function showCustomers()
+    {
+        // Mengambil data pelanggan dengan kolom name, email, dan is_active
+        $customers = Customer::select('name', 'email', 'is_active')->get();
+        
+        // Mengembalikan data dalam bentuk response JSON
+        return response()->json($customers);
+    }
 }

@@ -36,4 +36,13 @@ class PromoController extends Controller
         $promo->delete();
         return response()->json(['message' => 'Promo deleted successfully.']);
     }
+
+    public function showPromos()
+    {
+        // Mengambil data promo dengan kolom yang spesifik
+        $promos = Promo::select('name', 'price', 'is_active')->get();
+        
+        // Mengembalikan data dalam bentuk response JSON
+        return response()->json($promos);
+    }
 }

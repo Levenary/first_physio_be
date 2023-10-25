@@ -11,4 +11,8 @@ class Branch extends Model
     protected $casts = [
         'operation_json' => 'json',
     ];
+    public function PurchaseOrde()
+    {
+        return $this->hasMany(PurchaseOrder::class, 'branch_id', 'id');
+    }
 }
